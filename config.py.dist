@@ -1,0 +1,35 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# LLM - Gemini
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "gemini")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+LLM_MODEL = os.getenv("LLM_MODEL", "gemini-2.0-flash")
+LLM_MAX_TOKENS = int(os.getenv("LLM_MAX_TOKENS", "4096"))
+LLM_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE", "0.2"))
+
+# API
+API_HOST = os.getenv("API_HOST", "0.0.0.0")
+API_PORT = int(os.getenv("API_PORT", "8000"))
+API_DEBUG = os.getenv("API_DEBUG", "false").lower() == "true"
+
+# Database - PostgreSQL
+POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
+POSTGRES_PORT = int(os.getenv("POSTGRES_PORT", "5432"))
+POSTGRES_USER = os.getenv("POSTGRES_USER", "")
+POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "")
+POSTGRES_DB = os.getenv("POSTGRES_DB", "tenders_ai")
+
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+)
+DATABASE_POOL_SIZE = int(os.getenv("DATABASE_POOL_SIZE", "10"))
+DATABASE_MAX_OVERFLOW = int(os.getenv("DATABASE_MAX_OVERFLOW", "20"))
+
+# App
+APP_ENV = os.getenv("APP_ENV", "development")
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+SECRET_KEY = os.getenv("SECRET_KEY", "")
